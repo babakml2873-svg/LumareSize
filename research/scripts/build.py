@@ -120,9 +120,11 @@ if H:
         q=int(o.at[i,'pack']) if i in o.index else 1
         nt=str(h.notes) if isinstance(h.notes,str) else ''
         perpiece=None
-        if q>1 and re.search(r'per each|lbs?/each|per piece|/ea\b',nt,re.I) and not re.search(r'per pack|per carton|per case',nt,re.I):
+        if q>1 and re.search(r'per each \(|lbs?/each|value is per piece',nt,re.I) and not re.search(r'per pack|per carton|per case',nt,re.I):
             perpiece=kg; kg=kg*q
-        notes=[f"Exact part-number match ({h.match}) from {h.source_name}; value read from the fetched page/PDF/data feed: {h.weight_value} {h.weight_unit}"]
+        notes=[]
+        if 'lightingnewyork' in str(h.url).lower(): notes.append('NOTE: page found via lightingnewyork.com /search, which its robots.txt disallows – exclude if required')
+        notes+=[f"Exact part-number match ({h.match}) from {h.source_name}; value read from the fetched page/PDF/data feed: {h.weight_value} {h.weight_unit}"]
         if perpiece: notes.append(f'source weight is per piece ({rnd(perpiece)} kg); multiplied by pack qty {q} from title')
         if isinstance(h.notes,str) and h.notes.strip(): notes.append(h.notes.strip())
         if wt=='shipping': net=kg/1.15; gross=kg; notes.append('source value is shipping/gross weight; net estimated as gross/1.15')
