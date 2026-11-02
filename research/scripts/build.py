@@ -204,6 +204,27 @@ if _os.path.exists(SP+'ml_pred.pkl'):
                     'Net Weight per Piece (kg)':rnd(per) if q>1 else None,'Source Type':'Comparable (ML model)'})
         nml+=1
     print('ML estimates applied',nml)
+if _os.path.exists(SP+'strong_matches.pkl'):
+    SM=pd.read_pickle(SP+'strong_matches.pkl')
+    SM=SM[~SM.source.str.contains('homelectrical',case=False)]
+    nsm=0
+    for i,mm in SM.iterrows():
+        if i not in recs or recs[i]['Weight Status'].startswith('Verified'): continue
+        rec=recs[i]; q=int(o.at[i,'pack']); per=float(mm.match_kg); net=per*q
+        ml_per=None
+        if _os.path.exists(SP+'ml_pred.pkl') and i in MP.index: ml_per=float(MP.at[i,'ml_kg_piece'])
+        if ml_per and not (0.33<=per/ml_per<=3): continue   # disagree strongly with ML -> keep ML
+        gross,alloc=ship(net,rec['_cls'])
+        notes=[f"Estimated from a very similar product (any brand) with a published weight: {mm.brand} {mm.mpn} – '{str(mm.title)[:90]}' = {rnd(float(mm.weight_kg))} kg ({mm.weight_type}) from {mm.source}",
+               f"text+specification similarity score {mm.score:.2f} (validated: at score >0.7 median error ~5%)"+(f"; length scaling x{mm.scale:.2f}" if abs(mm.scale-1)>0.01 else ''),
+               (f"ML model estimate for comparison: {rnd(ml_per)} kg per piece" if ml_per else '')]
+        if q>1: notes.append(f'per piece {rnd(per)} kg x {q} (pack qty from title)')
+        notes.append(f'Shipping weight estimated {alloc}')
+        rec.update({'Net Weight (kg)':rnd(net),'Shipping Weight (kg)':rnd(gross),'Confidence':'Medium','Source Type':'Comparable (similar product, any brand)',
+            'Reference Brand':str(mm.brand),'Reference Model':str(mm.mpn),'Reference Weight (kg)':str(rnd(float(mm.weight_kg))),'Source URL':str(mm.url),
+            'Research Notes':'; '.join(x for x in notes if x),'Net Weight per Piece (kg)':rnd(per) if q>1 else None})
+        nsm+=1
+    print('strong similar-product matches applied',nsm)
 R=pd.DataFrame.from_dict(recs,orient='index')
 cols=['Net Weight (kg)','Shipping Weight (kg)','Weight Status','Source Type','Reference Brand','Reference Model','Reference Weight (kg)','Source URL','Confidence','Research Notes']
 full=d.join(R)
