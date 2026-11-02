@@ -5,8 +5,8 @@ SP='/tmp/claude-0/-home-user-LumareSize/4bdae89e-be9f-5b88-bcfd-cb08e1ba615f/scr
 OUT=sys.argv[1]
 f=pd.read_pickle(SP+'final.pkl'); R=pd.read_pickle(SP+'recs.pkl')
 prod=pd.read_pickle(SP+'prod.pkl')
-cols=['Net Weight (kg)','Shipping Weight (kg)','Weight Status','Source Type','Reference Brand','Reference Model','Reference Weight (kg)','Source URL','Confidence','Research Notes']
-orig=[c for c in f.columns if c not in cols+['_f','_cls']]
+cols=['Net Weight (kg)','Pack Qty (from title)','Net Weight per Piece (kg)','Shipping Weight (kg)','Weight Status','Source Type','Reference Brand','Reference Model','Reference Weight (kg)','Source URL','Confidence','Research Notes']
+orig=[c for c in f.columns if c not in cols+['_f','_cls','_vendor']]
 W=pd.ExcelWriter(OUT,engine='xlsxwriter',engine_kwargs={'options':{'strings_to_urls':False,'strings_to_formulas':False,'nan_inf_to_errors':True}})
 wb=W.book
 hdr=wb.add_format({'bold':True,'bg_color':'#1F4E78','font_color':'white','text_wrap':True,'valign':'top'})
@@ -27,8 +27,10 @@ rows=[('Product Weight Research – Summary',None),
 ('Coverage of variant rows', f"{var['Net Weight (kg)'].notna().mean():.1%}"),
 ('',None),
 ('Weight evidence breakdown (variant rows)',None),
-('Verified – Manufacturer',int(((var['Weight Status']=='Verified')&(var['Source Type']=='Manufacturer')).sum())),
-('Verified – Distributor/Retailer',int(((var['Weight Status']=='Verified')&(var['Source Type']!='Manufacturer')).sum())),
+('Verified – Manufacturer (exact part no.)',int(((var['Weight Status']=='Verified')&(var['Source Type']=='Manufacturer')).sum())),
+('Verified – Manufacturer (same model, other finish/CCT)',int(((var['Weight Status']=='Verified (finish variant)')&(var['Source Type']=='Manufacturer')).sum())),
+('Verified – Distributor/Retailer (exact part no.)',int(((var['Weight Status']=='Verified')&(var['Source Type']!='Manufacturer')).sum())),
+('Verified – Distributor/Retailer (same model, other finish/CCT)',int(((var['Weight Status']=='Verified (finish variant)')&(var['Source Type']!='Manufacturer')).sum())),
 ('Estimated – Comparable product',int((var['Weight Status']=='Estimated').sum())),
 ('',None),
 ('Confidence (variant rows)',None),

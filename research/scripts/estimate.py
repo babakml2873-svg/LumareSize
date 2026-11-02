@@ -42,6 +42,13 @@ def est(cls, t):
     if cls!='floor_box_cover' and has(t,r'arlington.*\bFLBC?\d') and has(t,r'cover'): return est('floor_box_cover',t)
     if cls!='lamp_bulb' and has(t,r'incandescent lamp|wedge ?base|halogen lamp|led lamp\b') and not has(t,r'fixture|socket'): return est('lamp_bulb',t)
     if cls!='floor_box' and has(t,r'electrical pedestal'): return W('F2:1'),['F2:1'],'electrical pedestal est. vs 3-gang cast floor box',Lo
+    FIXC={'downlight','pendant','chandelier','sconce','vanity','flush_mount','high_bay','flood','area_light','wall_pack','panel_troffer','vapor_strip','linear_arch','under_cabinet','landscape_well','landscape_path','landscape_spot','track_head','exit_emerg','light_fixture_generic','floor_box','ceiling_fan','heater','wire_lowvolt','floor_lamp','table_lamp'}
+    if cls in FIXC and has(t,r'\b(mr16|mr11|jdr|par ?\d\d|br ?\d\d|a19|bulb)\b') and has(t,r'\b\d+ ?w\b|halogen|incandescent|lamp') and not has(t,r'fixture|housing|track head|landscape light|spot ?light|path'): return est('lamp_bulb',t)
+    if cls in FIXC and has(t,r'install(ation)? kit|mounting kit|\btrim\b(?!.*(engine|downlight|led light))|\bclips?\b|suspension rod|\brod\b|mounting track|canopy top|terminator|end ?cap|\bbracket|wire guard|\blens\b|louver|shroud|visor|\bcover\b|cable|tubing|substrate|\bstem\b|extension|adapter|accessor|replacement|\bkit\b(?!.*fixture)'): 
+        if not has(t,r'track lighting kit|track kit|light kit|retrofit kit|downlight kit'): return est('channel_acc',t)
+    if cls!='misc' and has(t,r'heat shrink|shrink tub'): return W('H:10')*2,['H:10'],'heat-shrink tubing piece est. 2x #6 lug weight',Lo
+    if cls!='tape_connector' and has(t,r'bending extension|jumper|tape-to-tape|tape to tape'): return est('tape_connector',t+' jumper')
+    if has(t,r'gasket') and not has(t,r'cover|box|body with'): return W('F:24')*0.3,['F:24'],'gasket est. 30% of RACO 768 steel ring',Lo
     if has(t,r'pigtail'): return W('H:10'),['H:10'],'ground pigtail with screw est. at #6 copper lug weight',Lo
     if has(t,r'\bchain\b'): return W('D2:6','D2:7')/10,['D2:6','D2:7'],'chain per foot est. from 10ft LED extension cable weight per foot (pack = feet)',Lo
     if has(t,r'heat lamp'): return W('D:32','D:33')*1.4,['D:32','D:33'],'R40 heat lamp est. 1.4x BR30 lamp refs',Lo

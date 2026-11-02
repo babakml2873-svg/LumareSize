@@ -79,6 +79,7 @@ for i,r in o.iterrows():
     notes.append(f'Shipping weight estimated: {alloc}' if not shipping_basis else 'Shipping weight = reference gross weight')
     notes.append('Weight taken from search-engine result for the cited URL; source page could not be opened (session network policy) – confirm before relying on it')
     if kg>50 and r.pack>=20: notes.append('QC: large bulk pack weight – verify pack quantity')
+    if isinstance(r.get('flag',''),str) and r.get('flag',''): notes.append('QC: '+r.flag)
     recs[i]={
      'Net Weight (kg)':rnd(net),'Shipping Weight (kg)':rnd(gross),
      'Weight Status':status,'Source Type':stype,
@@ -87,7 +88,96 @@ for i,r in o.iterrows():
      'Reference Weight (kg)':'; '.join(str(rnd(x['weight_kg'])) for x in refs)+('' if all(not x.get('pack_qty') or x.get('pack_qty')==1 for x in refs) else ' (pack totals: '+', '.join(f"{x.get('pack_qty')}" for x in refs)+')'),
      'Source URL':' | '.join(dict.fromkeys(str(x.get('url')) for x in refs)),
      'Confidence':conf,'Research Notes':'; '.join(notes),
-     '_cls':r.cls}
+     '_cls':r.cls,'_vendor':v.at[i,'Vendor'] if i in v.index else '','Pack Qty (from title)':int(r.pack),'Net Weight per Piece (kg)':rnd(net/r.pack) if r.pack>1 else None}
+# ---- merge harvested exact-SKU weights (pages/PDFs/feeds actually fetched)
+import glob as _g
+H=[]
+for fn in _g.glob(SP+'results/*.csv'):
+    try: x=pd.read_csv(fn,on_bad_lines='skip'); x['_grp']=fn
+    except Exception as ex: print('skip',fn,ex); continue
+    H.append(x)
+nh=0
+if H:
+    H=pd.concat(H,ignore_index=True)
+    H=H[pd.to_numeric(H.weight_kg,errors='coerce')>0].copy(); H['weight_kg']=pd.to_numeric(H.weight_kg)
+    H=H[~H.url.fillna('').str.contains('lumera|ebay\\.|cdn.shopify.com/s/files/1/0751/5455/4925',case=False)]
+    pr={'Manufacturer':0,'Distributor':1,'Retailer':2}
+    H['_p']=H.source_type.map(pr).fillna(3)+H.match.map({'exact':0,'variant':0.5}).fillna(1)
+    # placeholder filter: non-manufacturer source+vendor where one value covers >=25% of >=15 rows
+    H['_vend']=H.row_id.map(v['Vendor'])
+    H['_r']=H.weight_kg.round(3)
+    drop=[]
+    for (s,ve),g in H[H.source_type!='Manufacturer'].groupby(['source_name','_vend']):
+        if len(g)>=15:
+            vc=g._r.value_counts()
+            if vc.iloc[0]/len(g)>=0.25: drop+=list(g.index[g._r==vc.index[0]]); print('placeholder dropped',s,ve,vc.index[0],vc.iloc[0],'/',len(g))
+    H=H.drop(index=drop)
+    H=H.sort_values('_p').drop_duplicates('row_id')
+    for _,h in H.iterrows():
+        i=int(h.row_id)
+        if i not in recs: continue
+        cls=recs[i]['_cls']; kg=float(h.weight_kg); wt=str(h.weight_type).lower()
+        q=int(o.at[i,'pack']) if i in o.index else 1
+        nt=str(h.notes) if isinstance(h.notes,str) else ''
+        perpiece=None
+        if q>1 and re.search(r'per each|lbs?/each|per piece|/ea\b',nt,re.I) and not re.search(r'per pack|per carton|per case',nt,re.I):
+            perpiece=kg; kg=kg*q
+        notes=[f"Exact part-number match ({h.match}) from {h.source_name}; value read from the fetched page/PDF/data feed: {h.weight_value} {h.weight_unit}"]
+        if perpiece: notes.append(f'source weight is per piece ({rnd(perpiece)} kg); multiplied by pack qty {q} from title')
+        if isinstance(h.notes,str) and h.notes.strip(): notes.append(h.notes.strip())
+        if wt=='shipping': net=kg/1.15; gross=kg; notes.append('source value is shipping/gross weight; net estimated as gross/1.15')
+        else:
+            net=kg; gross,alloc=ship(net,cls); notes.append(('source labels it net/product weight' if wt=='net' else 'source does not state net vs shipping (treated as product weight)')+f'; shipping weight estimated {alloc}')
+        st=h.source_type if h.source_type in ('Manufacturer','Distributor','Retailer') else 'Distributor'
+        conf='High' if h.match=='exact' and wt in ('net','shipping') else 'Medium' if h.match=='exact' else 'Medium'
+        if h.match=='exact' and wt=='unknown' and st=='Manufacturer': conf='High'
+        recs[i].update({'Net Weight (kg)':rnd(net),'Shipping Weight (kg)':rnd(gross),'Weight Status':'Verified' if h.match=='exact' else 'Verified (finish variant)',
+            'Source Type':'Manufacturer' if st=='Manufacturer' else 'Distributor/Retailer','Reference Brand':recs[i].get('_vendor',''),'Reference Model':str(h.sku),
+            'Reference Weight (kg)':str(rnd(float(h.weight_kg))),'Source URL':str(h.url),'Confidence':conf,'Research Notes':'; '.join(notes),
+            'Net Weight per Piece (kg)':rnd(perpiece if perpiece else (net/q if q>1 else None)) if (perpiece or q>1) else None})
+        nh+=1
+print('harvested rows merged',nh)
+# ---- calibrate remaining estimates against nearest harvested (fetched) product of same category
+import math as _m
+hv={}
+if len(H):
+    for _,h in H.iterrows():
+        i=int(h.row_id)
+        if i in recs and str(h.match)=='exact' and i in o.index:
+            per_est=float(o.at[i,'kg_each']) if o.at[i,'kg_each'] else None
+            q=int(o.at[i,'pack'])
+            kgp=float(h.weight_kg)
+            # harvested values are per sellable unit; convert to per piece when title has pack qty and value is clearly per pack
+            if q>1: kgp=kgp/q
+            if per_est and per_est>0 and 0.4<=kgp/per_est<=2.5: hv.setdefault(recs[i]['_cls'],[]).append((i,recs[i]['_vendor'],per_est,kgp,h))
+ncal=0
+for i,rec in recs.items():
+    if rec['Weight Status'] in ('Verified','Verified (finish variant)'): continue
+    cands=hv.get(rec['_cls'],[])
+    if len(cands)<1 or i not in o.index or not o.at[i,'kg_each']: continue
+    e=float(o.at[i,'kg_each']); q=int(o.at[i,'pack'])
+    same=[c for c in cands if c[1]==rec['_vendor']]
+    pool=same if same else cands
+    j=min(pool,key=lambda c: abs(_m.log(e/c[2])))
+    r=e/j[2]
+    if not (0.33<=r<=3): continue
+    # calibration ratio for the category/brand (median of real/estimate)
+    rat=sorted(c[3]/c[2] for c in pool); med=rat[len(rat)//2]
+    per=j[3]*r            # scale nearest real product by model size ratio
+    if not (0.5<=per/e<=2): continue
+    net=per*q; h=j[4]
+    gross,alloc=ship(net,rec['_cls'])
+    conf='Medium' if (same and 0.67<=r<=1.5) else 'Low'
+    notes=[f"Estimated from nearest comparable product with a fetched weight: {h.sku} ({j[1]}) = {rnd(j[3])} kg, same category '{rec['_cls']}'"+(' and same brand' if same else ' (different brand)'),
+           f"size/spec scaling factor {r:.2f} from title attributes ({o.at[i,'basis'][:90]})",
+           f"category calibration check: median real/model ratio for this {'brand+' if same else ''}category = {med:.2f} over {len(pool)} fetched weights"]
+    if q>1: notes.append(f'per piece {rnd(per)} kg x {q} (pack qty from title)')
+    notes.append(f'Shipping weight estimated {alloc}')
+    rec.update({'Net Weight (kg)':rnd(net),'Shipping Weight (kg)':rnd(gross),'Weight Status':'Estimated','Source Type':'Comparable',
+        'Reference Brand':j[1],'Reference Model':str(h.sku),'Reference Weight (kg)':str(rnd(j[3])),'Source URL':str(h.url),'Confidence':conf,
+        'Research Notes':'; '.join(notes),'Net Weight per Piece (kg)':rnd(per) if q>1 else None})
+    ncal+=1
+print('calibrated estimates',ncal)
 R=pd.DataFrame.from_dict(recs,orient='index')
 cols=['Net Weight (kg)','Shipping Weight (kg)','Weight Status','Source Type','Reference Brand','Reference Model','Reference Weight (kg)','Source URL','Confidence','Research Notes']
 full=d.join(R)
