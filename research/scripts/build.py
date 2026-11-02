@@ -180,6 +180,30 @@ for i,rec in recs.items():
         'Research Notes':'; '.join(notes),'Net Weight per Piece (kg)':rnd(per) if q>1 else None})
     ncal+=1
 print('calibrated estimates',ncal)
+# ---- ML estimate (LightGBM trained on all verified rows) replaces rule/calibrated estimate
+import os as _os
+if _os.path.exists(SP+'ml_pred.pkl'):
+    MP=pd.read_pickle(SP+'ml_pred.pkl'); nml=0
+    for i,rec in recs.items():
+        if rec['Weight Status'].startswith('Verified') or i not in MP.index: continue
+        q=int(o.at[i,'pack']); per=float(MP.at[i,'ml_kg_piece']); lo=float(MP.at[i,'lo']); hi=float(MP.at[i,'hi'])
+        if not per>0: continue
+        net=per*q; gross,alloc=ship(net,rec['_cls'])
+        width=hi/max(lo,1e-6)
+        conf='Medium' if width<=3 else 'Low'
+        if 'price-check' in rec['Research Notes']: conf='Low'
+        prev=rec['Research Notes']
+        notes=[f"Estimated by machine-learning model (LightGBM) trained on 20,742 weights read from manufacturer/distributor sources; inputs: category, brand, product type, title text, size attributes, pack qty, price",
+               f"80% prediction interval per piece: {rnd(lo)}–{rnd(hi)} kg",
+               "model accuracy on unseen products: median error 1.20x; 75% within ±50%"]
+        if q>1: notes.append(f'per piece {rnd(per)} kg x {q} (pack qty from title)')
+        notes.append(f'Shipping weight estimated {alloc}')
+        if rec.get('Reference Model'): notes.append('Reference product shown = nearest comparable with a published weight (sanity reference)')
+        if 'QC:' in prev: notes+= [x for x in prev.split('; ') if x.startswith('QC:')]
+        rec.update({'Net Weight (kg)':rnd(net),'Shipping Weight (kg)':rnd(gross),'Confidence':conf,'Research Notes':'; '.join(notes),
+                    'Net Weight per Piece (kg)':rnd(per) if q>1 else None,'Source Type':'Comparable (ML model)'})
+        nml+=1
+    print('ML estimates applied',nml)
 R=pd.DataFrame.from_dict(recs,orient='index')
 cols=['Net Weight (kg)','Shipping Weight (kg)','Weight Status','Source Type','Reference Brand','Reference Model','Reference Weight (kg)','Source URL','Confidence','Research Notes']
 full=d.join(R)
