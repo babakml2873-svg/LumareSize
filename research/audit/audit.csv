@@ -1,0 +1,181 @@
+row_id,source_name,sku,recorded_kg,verdict,correct_kg,comment
+16177,Walters Wholesale Electric (USESI) catalog,DVRF-5NS-BL,0.12247,ok,,walterswholesale page is JS-only; re-checked via public VTEX catalog API for same product slug: MPN and Net/Gross Weight match
+7011,Walters Wholesale Electric (USESI) catalog,RRST-HN4B-TP,0.12247,ok,,walterswholesale page is JS-only; re-checked via public VTEX catalog API for same product slug: MPN and Net/Gross Weight match
+6332,Walters Wholesale Electric (USESI) catalog,MS-VPS2-BR,0.1134,ok,,walterswholesale page is JS-only; re-checked via public VTEX catalog API for same product slug: MPN and Net/Gross Weight match
+6257,Walters Wholesale Electric (USESI) catalog,MRF2S-8S-DV-AL,0.13154,ok,,walterswholesale page is JS-only; re-checked via public VTEX catalog API for same product slug: MPN and Net/Gross Weight match
+6118,Walters Wholesale Electric (USESI) catalog,RRD-W3BSRL-WH,0.2268,ok,,walterswholesale page is JS-only; re-checked via public VTEX catalog API for same product slug: MPN and Net/Gross Weight match
+6898,Walters Wholesale Electric (USESI) catalog,SCRS-15-TR-PB,0.15876,ok,,walterswholesale page is JS-only; re-checked via public VTEX catalog API for same product slug: MPN and Net/Gross Weight match
+63224,Walters Wholesale Electric (USESI) catalog,15W47,0.16783,ok,,walterswholesale page is JS-only; re-checked via public VTEX catalog API for same product slug: MPN and Net/Gross Weight match
+45663,Walters Wholesale Electric (USESI) catalog,CSB38400,3.6741,ok,,"walterswholesale page is JS-only; re-checked via public VTEX catalog API for same product slug: MPN and Net/Gross Weight match; Gross 8.1 lb for 50-pack box, consistent with ~70 g/bolt; per pack (matches title)"
+5326,Walters Wholesale Electric (USESI) catalog,AY2-LFSQH-AL,0.15876,ok,,walterswholesale page is JS-only; re-checked via public VTEX catalog API for same product slug: MPN and Net/Gross Weight match
+14511,Walters Wholesale Electric (USESI) catalog,5657-2T,0.10433,ok,,walterswholesale page is JS-only; re-checked via public VTEX catalog API for same product slug: MPN and Net/Gross Weight match
+16645,Walters Wholesale Electric (USESI) catalog,NT-S-NFB-AL,0.09072,ok,,walterswholesale page is JS-only; re-checked via public VTEX catalog API for same product slug: MPN and Net/Gross Weight match
+6328,Walters Wholesale Electric (USESI) catalog,MS-VPS2-TP,0.1134,ok,,walterswholesale page is JS-only; re-checked via public VTEX catalog API for same product slug: MPN and Net/Gross Weight match
+44560,Walters Wholesale Electric (USESI) catalog,NSR100L,0.04944,pack_issue,0.4944,Walters Net Weight 0.109 lb is per connector (Gross 1 lb for box); title (10-Pack) -> x10 (~0.49 kg) or use gross 0.454 kg
+14343,Walters Wholesale Electric (USESI) catalog,T5632-HGW,0.15422,ok,,walterswholesale page is JS-only; re-checked via public VTEX catalog API for same product slug: MPN and Net/Gross Weight match
+13005,Walters Wholesale Electric (USESI) catalog,RE634-WC,0.19958,ok,,walterswholesale page is JS-only; re-checked via public VTEX catalog API for same product slug: MPN and Net/Gross Weight match
+16219,Walters Wholesale Electric (USESI) catalog,FG-2-BL,0.06804,ok,,walterswholesale page is JS-only; re-checked via public VTEX catalog API for same product slug: MPN and Net/Gross Weight match
+49553,Walters Wholesale Electric (USESI) catalog,0406500,0.07711,pack_issue,0.4627,"Walters sells single bulb (""Each""), Net 0.17 lb; title (6-Pack) -> x6"
+63174,Walters Wholesale Electric (USESI) catalog,16D24-UH,0.3538,ok,,walterswholesale page is JS-only; re-checked via public VTEX catalog API for same product slug: MPN and Net/Gross Weight match
+13930,Walters Wholesale Electric (USESI) catalog,GFPL1-PLW,0.17237,ok,,walterswholesale page is JS-only; re-checked via public VTEX catalog API for same product slug: MPN and Net/Gross Weight match
+3807,Kuzco Lighting products.json,VL52718-WT,1.197,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+24609,Kuzco Lighting products.json,CH3128-BG/OP,6.5,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+20491,Kuzco Lighting products.json,VL18236-BG-UNV,1.678,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+19169,Kuzco Lighting products.json,494016-BK,2.812,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+23676,Kuzco Lighting products.json,CH93824-AN,4.717,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+23248,Kuzco Lighting products.json,CH14348-BK,10.478,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+17482,Kuzco Lighting products.json,PD52719-BN,2.993,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+17537,Kuzco Lighting products.json,CF78752-WH-LKP,9.401,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+23605,Kuzco Lighting products.json,CH94829-BK,7.847,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+17812,Kuzco Lighting products.json,PD7916-BK,2.086,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+24438,Kuzco Lighting products.json,PD14740-BK,2.195,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+7676,homelectrical.com product page (Product Specifications > Weight),DI-12V-SPOT-TL27-90-BR,0.0454,ok,,page re-opened: Part Number and Weight match
+3016,homelectrical.com product page (Product Specifications > Weight),120-H3COB-30,1.5105,ok,,"page re-opened: Part Number and Weight match; weight 3.33 lb matches; retailer title says 15-ft vs our 150-ft reel, but same part no.; plausible for 150 ft"
+2895,homelectrical.com product page (Product Specifications > Weight),NAVI-CCT-96-24-WH,0.2268,ok,,page re-opened: Part Number and Weight match
+3453,homelectrical.com product page (Product Specifications > Weight),DI-KIT-24V-BC1ODBELV60-4000,0.5443,ok,,page re-opened: Part Number and Weight match
+3518,homelectrical.com product page (Product Specifications > Weight),DI-24V-VLX3-30-100,1.1793,ok,,page re-opened: Part Number and Weight match
+50067,homelectrical.com product page (Product Specifications > Weight),DI-0824-F,0.0091,ok,,page re-opened: Part Number and Weight match
+3091,homelectrical.com product page (Product Specifications > Weight),DI-120V-INFBSC3-30-164,0.4536,placeholder,,"page says 1.00 lb, but 164 ft 120V tape spool cannot weigh 0.45 kg; 1.00 lb is HomElectrical default for 271 Diode rows (spools, channels, connectors alike)"
+2767,homelectrical.com product page (Product Specifications > Weight),DI-CPCHB-SQ-96W,0.9979,ok,,page re-opened: Part Number and Weight match
+2946,homelectrical.com product page (Product Specifications > Weight),DI-12V-BLBSC2-30-400,7.7111,ok,,page re-opened: Part Number and Weight match
+49988,homelectrical.com product page (Product Specifications > Weight),DI-1810,0.2631,ok,,page re-opened: Part Number and Weight match
+59727,Arlington Industries (aifittings.com),842,0.03719,pack_issue,1.8595,0.082 lbs/each; title (50-Pack) = unit packaging 50pcs -> listing weight x50
+60435,Arlington Industries (aifittings.com),FLBT4400UBL,1.47418,ok,,"aifittings page re-opened: same part, ""lbs/each"" matches"
+60611,Arlington Industries (aifittings.com),LPCG507W,0.02404,pack_issue,0.601,0.053 lbs/each; title (25-Pack) -> x25
+59764,Arlington Industries (aifittings.com),855,0.57425,ok,,"aifittings page re-opened: same part, ""lbs/each"" matches"
+61030,Arlington Industries (aifittings.com),SH1,0.00363,pack_issue,0.363,0.008 lbs/each; title (100-Pack) -> x100
+59789,Arlington Industries (aifittings.com),848,0.14515,pack_issue,1.4515,0.320 lbs/each; title (10-Pack) -> x10
+59536,Arlington Industries (aifittings.com),456250,0.18643,pack_issue,1.8643,0.411 lbs/each; title (10-Pack) -> x10
+60074,Arlington Industries (aifittings.com),FB405,0.06169,pack_issue,1.5423,0.136 lbs/each; title (25-Pack) -> x25
+60887,Arlington Industries (aifittings.com),NMSC90100,0.04354,pack_issue,0.2177,0.096 lbs/each; title (5-Pack) -> x5
+59426,Arlington Industries (aifittings.com),4004,0.01361,pack_issue,0.1361,0.030 lbs/each; title (10-Pack) -> x10
+17349,Sonic Electric (sonicelectric.com product description),NLUD-8334B,4.92148,ok,,"Sonic product JSON re-fetched: ""Product Weight (lb)"" in description matches (Shopify grams on same item = 1814 default, correctly ignored)"
+9482,Sonic Electric (sonicelectric.com product description),NTE-865L940SW,0.86183,ok,,"Sonic product JSON re-fetched: ""Product Weight (lb)"" in description matches (Shopify grams on same item = 1814 default, correctly ignored)"
+10382,Sonic Electric (sonicelectric.com product description),NLCBC2-65140WW/AEM,0.54431,ok,,"Sonic product JSON re-fetched: ""Product Weight (lb)"" in description matches (Shopify grams on same item = 1814 default, correctly ignored)"
+32740,Sonic Electric (sonicelectric.com product description),NLCBC2-65330DW/10LE4,0.68039,ok,,"Sonic product JSON re-fetched: ""Product Weight (lb)"" in description matches (Shopify grams on same item = 1814 default, correctly ignored)"
+10880,Sonic Electric (sonicelectric.com product description),NLCBC2-556TWWW/10,0.56699,ok,,"Sonic product JSON re-fetched: ""Product Weight (lb)"" in description matches (Shopify grams on same item = 1814 default, correctly ignored)"
+32361,Sonic Electric (sonicelectric.com product description),NPTPSW-E22/345W,0.86183,ok,,"Sonic product JSON re-fetched: ""Product Weight (lb)"" in description matches (Shopify grams on same item = 1814 default, correctly ignored)"
+17325,Sonic Electric (sonicelectric.com product description),NTLE-850930S,1.81437,ok,,"Sonic product JSON re-fetched: ""Product Weight (lb)"" in description matches (Shopify grams on same item = 1814 default, correctly ignored)"
+11020,Sonic Electric (sonicelectric.com product description),NLCBC2-55227BZBZ/10,0.49895,ok,,"Sonic product JSON re-fetched: ""Product Weight (lb)"" in description matches (Shopify grams on same item = 1814 default, correctly ignored)"
+29583,"Focus Industries cut sheet (""SHIP WEIGHT"")",SL08ALLEDPBAT,2.7216,ok,,cut sheet re-opened: catalog row and SHIP WEIGHT match; finish->material mapping correct; shipping
+30720,"Focus Industries cut sheet (""SHIP WEIGHT"")",DL38NLACLSTU,2.7216,ok,,cut sheet re-opened: catalog row and SHIP WEIGHT match; finish->material mapping correct; shipping
+30776,"Focus Industries cut sheet (""SHIP WEIGHT"")",DL20NLACBLT,1.3608,ok,,cut sheet re-opened: catalog row and SHIP WEIGHT match; finish->material mapping correct; shipping
+28556,"Focus Industries cut sheet (""SHIP WEIGHT"")",SL37MR16NLCPR,0.9072,ok,,cut sheet re-opened: catalog row and SHIP WEIGHT match; finish->material mapping correct; shipping
+29589,"Focus Industries cut sheet (""SHIP WEIGHT"")",SL08ALL12BRT,1.3608,ok,,cut sheet re-opened: catalog row and SHIP WEIGHT match; finish->material mapping correct; shipping
+29181,"Focus Industries cut sheet (""SHIP WEIGHT"")",SL50LEDPSBBAR,0.9072,ok,,cut sheet re-opened: catalog row and SHIP WEIGHT match; finish->material mapping correct; shipping
+29961,"Focus Industries cut sheet (""SHIP WEIGHT"")",PL23S4WDM18LEDPBLT,1.3608,ok,,cut sheet re-opened: catalog row and SHIP WEIGHT match; finish->material mapping correct; shipping
+29864,"Focus Industries cut sheet (""SHIP WEIGHT"")",RXD04TSL74COPWIR,0.9072,ok,,cut sheet re-opened: catalog row and SHIP WEIGHT match; finish->material mapping correct; shipping
+4304,Lighting New York,60-8219,5.888,ok,,"page re-opened: same model, ""Weight:"" matches (lb)"
+4294,Lighting New York,60-8214,3.592,ok,,"page re-opened: same model, ""Weight:"" matches (lb)"
+19001,Lighting New York,60-8232,2.0,ok,,"page re-opened: same model, ""Weight:"" matches (lb)"
+51640,Lighting New York,60-6572,2.531,ok,,"page re-opened: same model, ""Weight:"" matches (lb)"
+4380,Lighting New York,62-1452R1,2.477,ok,,"page re-opened: same model, ""Weight:"" matches (lb)"
+51064,Lighting New York,65-893,8.391,ok,,"page re-opened: same model, ""Weight:"" matches (lb)"
+50891,Lighting New York,65-794R2,2.055,ok,,"page re-opened: same model, ""Weight:"" matches (lb); LNY lists 65-794R2 as Nuvo Brentwood LED Hi-Bay (Satco/Nuvo share numbering); weight matches"
+20959,Kuzco Lighting (Alora Mood) products.json,SF641016MB,3.497,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+23398,Kuzco Lighting (Alora Mood) products.json,CH628830CHOP,16.297,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+24708,Kuzco Lighting (Alora Mood) products.json,FM553211AGWH,2.417,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+23092,Kuzco Lighting (Alora Mood) products.json,CH450732AGCW,5.402,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+20745,Kuzco Lighting (Alora Mood) products.json,PD579107MBGR,3.447,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+21091,Kuzco Lighting (Alora Mood) products.json,FM537508BNOP,1.546,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+23364,Kuzco Lighting (Alora Mood) products.json,CH542324AGWT,6.917,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+25331,intermatic.com (commerce API shippingWeight),T103,1.2447,ok,,intermatic API re-queried: erpNumber and shippingWeight match
+25632,intermatic.com (commerce API shippingWeight),WP5110C,0.2948,ok,,intermatic API re-queried: erpNumber and shippingWeight match
+25550,intermatic.com (commerce API shippingWeight),IOS-DSIF-WH,0.1814,ok,,intermatic API re-queried: erpNumber and shippingWeight match
+25092,intermatic.com (commerce API shippingWeight),ET2125CR,1.4969,ok,,intermatic API re-queried: erpNumber and shippingWeight match
+47573,intermatic.com (commerce API shippingWeight),H20S23D1DG1,0.2722,ok,,intermatic API re-queried: erpNumber and shippingWeight match
+25160,intermatic.com (commerce API shippingWeight),T10004R,4.7527,ok,,intermatic API re-queried: erpNumber and shippingWeight match
+25557,intermatic.com (commerce API shippingWeight),HB113,0.249,ok,,intermatic API re-queried: erpNumber and shippingWeight match
+19220,LightingSupply.com,SCX4-IC-MCT4,0.299,ok,,product JSON re-fetched: sku and grams match
+39258,LightingSupply.com,CDLX-MD-15-45W-30K,2.771,ok,,product JSON re-fetched: sku and grams match
+1986,LightingSupply.com,GL-12V-12W-40K-BR,0.916,ok,,product JSON re-fetched: sku and grams match
+27303,LightingSupply.com,MR16-500L-C90-30K-D,0.036,ok,,product JSON re-fetched: sku and grams match
+27273,LightingSupply.com,LD-174-BZ,0.467,ok,,product JSON re-fetched: sku and grams match
+52509,LightingSupply.com,WAE-4FT-40K-D,1.501,ok,,product JSON re-fetched: sku and grams match
+52486,LightingSupply.com,VTU-20W-30K,2.123,ok,,product JSON re-fetched: sku and grams match
+45927,ADI Global Distribution (adiglobaldistribution.us),2WS12112,0.31751,ok,,"ADI API re-queried: same MPN, shippingWeight matches; value is per ADI sell unit (= the box for Dottie N-packs, plausible per box)"
+44117,ADI Global Distribution (adiglobaldistribution.us),RSP12C,0.02268,ok,,"ADI API re-queried: same MPN, shippingWeight matches; value is per ADI sell unit (= the box for Dottie N-packs, plausible per box)"
+45970,ADI Global Distribution (adiglobaldistribution.us),14H134,1.0478,ok,,"ADI API re-queried: same MPN, shippingWeight matches; value is per ADI sell unit (= the box for Dottie N-packs, plausible per box)"
+45289,ADI Global Distribution (adiglobaldistribution.us),HLS516,0.15876,ok,,"ADI API re-queried: same MPN, shippingWeight matches; value is per ADI sell unit (= the box for Dottie N-packs, plausible per box); ADI shippingWeight 0.35 lb matches; per 100-pack box but low for 100 lag shields (plausibility uncertain)"
+45882,ADI Global Distribution (adiglobaldistribution.us),414SS,0.1134,ok,,"ADI API re-queried: same MPN, shippingWeight matches; value is per ADI sell unit (= the box for Dottie N-packs, plausible per box)"
+45929,ADI Global Distribution (adiglobaldistribution.us),2WS1034,0.14515,ok,,"ADI API re-queried: same MPN, shippingWeight matches; value is per ADI sell unit (= the box for Dottie N-packs, plausible per box)"
+45974,ADI Global Distribution (adiglobaldistribution.us),140M,0.1134,ok,,"ADI API re-queried: same MPN, shippingWeight matches; value is per ADI sell unit (= the box for Dottie N-packs, plausible per box)"
+23987,americanlighting.com product page (Specifications > Weight),EE1-AAFR-2M-BNDL5,1.3063,ok,,"page re-opened: SKU and ""Physical Weight"" match"
+3261,americanlighting.com product page (Specifications > Weight),STLHD-WW-100,1.1793,ok,,"page re-opened: SKU and ""Physical Weight"" match"
+23971,americanlighting.com product page (Specifications > Weight),INLINE-RGB-CTRL,0.0454,ok,,"page re-opened: SKU and ""Physical Weight"" match"
+3020,americanlighting.com product page (Specifications > Weight),CNVS-WH-12x24,0.8618,ok,,"page re-opened: SKU and ""Physical Weight"" match"
+23909,americanlighting.com product page (Specifications > Weight),MLUX-SPL2,0.0363,ok,,"page re-opened: SKU and ""Physical Weight"" match"
+3174,americanlighting.com product page (Specifications > Weight),MVP-1-30-BK-B,0.1814,ok,,"page re-opened: SKU and ""Physical Weight"" match"
+24104,americanlighting.com product page (Specifications > Weight),TL-3JUMP6-COB,0.0045,ok,,"page re-opened: SKU and ""Physical Weight"" match; 0.01 lb matches page (low-precision floor; page says 6-inch jumper, title says 24in)"
+23001,Kuzco Lighting (Alora) products.json,WV355223UBGO,2.998,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+24800,Kuzco Lighting (Alora) products.json,PD317120UB,4.091,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+22713,Kuzco Lighting (Alora) products.json,PL307931ANTL,33.022,implausible,,"grams match feed (33022 g, all 3 finishes) but 33 kg for a 32-in picture light is not credible even as shipping weight; sibling PL307919 = 20 kg likewise"
+22649,Kuzco Lighting (Alora) products.json,PD338422UBCC,11.203,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+22935,Kuzco Lighting (Alora) products.json,WV357109VBAR,2.299,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+22931,Kuzco Lighting (Alora) products.json,WV321628PN,6.799,ok,,products/<handle>.json re-fetched: sku/grams match (grams likely shipping-ish)
+29805,"Focus Industries spec sheet (""SHIP WEIGHT"" by material)",RXP04L24BRSBKM,1.3608,ok,,spec sheet re-opened: SHIP WEIGHT for body material matches; shipping
+30517,"Focus Industries spec sheet (""SHIP WEIGHT"" by material)",FA26GFICBAT,0.9072,ok,,spec sheet re-opened: SHIP WEIGHT for body material matches; shipping
+30618,"Focus Industries spec sheet (""SHIP WEIGHT"" by material)",DL45LEDM1540BLT,0.4536,ok,,spec sheet re-opened: SHIP WEIGHT for body material matches; shipping
+31094,"Focus Industries spec sheet (""SHIP WEIGHT"" by material)",AL04L12BRT,0.9072,ok,,spec sheet re-opened: SHIP WEIGHT for body material matches; shipping
+30684,"Focus Industries spec sheet (""SHIP WEIGHT"" by material)",DL42LEDM740WTX,0.4536,ok,,spec sheet re-opened: SHIP WEIGHT for body material matches; shipping
+29846,"Focus Industries spec sheet (""SHIP WEIGHT"" by material)",RXD08L24BAR,1.3608,ok,,spec sheet re-opened: SHIP WEIGHT for body material matches; shipping
+47484,Sonic Electric,E3LKF1,3.175,ok,,Sonic product JSON re-fetched: weight matches (description lb or non-default grams)
+27324,Sonic Electric,RDL2S-BF-27K-WH,0.2794,ok,,Sonic product JSON re-fetched: weight matches (description lb or non-default grams)
+12062,Sonic Electric,EL61530BZ,1.361,ok,,Sonic product JSON re-fetched: weight matches (description lb or non-default grams)
+37342,Sonic Electric,CRLC4-15W-MCT-D-WH,0.7167,ok,,Sonic product JSON re-fetched: weight matches (description lb or non-default grams)
+11959,Sonic Electric,EL410CT5BB,0.953,ok,,Sonic product JSON re-fetched: weight matches (description lb or non-default grams)
+47492,Sonic Electric,E3LK54ICAD,1.588,ok,,Sonic product JSON re-fetched: weight matches (description lb or non-default grams)
+16458,Elliott Electric Supply,MA-1000-LA,0.1134,ok,,"elliottelectric.com unreachable now (connection closed); verified from cached page agents/g4/dl/ell: MPN and ""Weight per unit (lbs/each)"" match"
+5503,Elliott Electric Supply,PJ2-2BRL-GWH-L01,0.0227,ok,,"elliottelectric.com unreachable now (connection closed); verified from cached page agents/g4/dl/ell: MPN and ""Weight per unit (lbs/each)"" match"
+6837,Elliott Electric Supply,SCR-15-GFST-SW,0.1542,ok,,"elliottelectric.com unreachable now (connection closed); verified from cached page agents/g4/dl/ell: MPN and ""Weight per unit (lbs/each)"" match"
+15889,Elliott Electric Supply,AY-103PH-WH,0.127,ok,,"elliottelectric.com unreachable now (connection closed); verified from cached page agents/g4/dl/ell: MPN and ""Weight per unit (lbs/each)"" match"
+15937,Elliott Electric Supply,CA-1PS-WH,0.068,ok,,"elliottelectric.com unreachable now (connection closed); verified from cached page agents/g4/dl/ell: MPN and ""Weight per unit (lbs/each)"" match"
+16123,Elliott Electric Supply,DVCL-253P-IV,0.1588,ok,,"elliottelectric.com unreachable now (connection closed); verified from cached page agents/g4/dl/ell: MPN and ""Weight per unit (lbs/each)"" match"
+52449,"coronalighting.com product page (""Ship Weight LBS"")",CL-205-AB,0.9072,ok,,"page re-opened: model and ""Ship Weight LBS"" match; shipping"
+16755,"coronalighting.com product page (""Ship Weight LBS"")",CL-202-SS,1.8144,ok,,"page re-opened: model and ""Ship Weight LBS"" match; shipping"
+52405,"coronalighting.com product page (""Ship Weight LBS"")",CL-350-BK,0.6804,ok,,"page re-opened: model and ""Ship Weight LBS"" match; shipping"
+3981,"coronalighting.com product page (""Ship Weight LBS"")",CL-731B-GM,1.8144,ok,,"page re-opened: model and ""Ship Weight LBS"" match; shipping"
+16753,"coronalighting.com product page (""Ship Weight LBS"")",CL-201-SS,1.8144,ok,,"page re-opened: model and ""Ship Weight LBS"" match; shipping"
+4005,"coronalighting.com product page (""Ship Weight LBS"")",CL-131B-GM,0.9072,ok,,"page re-opened: model and ""Ship Weight LBS"" match; shipping"
+27943,sonicelectric.com Shopify product JSON (variant grams),ULB02,2.041,ok,,Sonic JSON re-fetched: sku/grams match; grams are rounded-lb shipping-ish values
+11402,sonicelectric.com Shopify product JSON (variant grams),SPS02-SS,1.134,ok,,Sonic JSON re-fetched: sku/grams match; grams are rounded-lb shipping-ish values
+1728,sonicelectric.com Shopify product JSON (variant grams),CB07-SS 3K,0.454,ok,,Sonic JSON re-fetched: sku/grams match; grams are rounded-lb shipping-ish values
+27951,sonicelectric.com Shopify product JSON (variant grams),STS09,1.814,placeholder,,grams 1814 (=4.0 lb) is the Sonic Shopify default weight (15.5k of ~22k variants); STS09 is a small SS deck light
+27910,sonicelectric.com Shopify product JSON (variant grams),CDPA61,1.134,ok,,Sonic JSON re-fetched: sku/grams match; grams are rounded-lb shipping-ish values
+27937,sonicelectric.com Shopify product JSON (variant grams),STB01,0.635,ok,,Sonic JSON re-fetched: sku/grams match; grams are rounded-lb shipping-ish values
+53875,HomElectrical.com product page (Product Specifications > Weight),LED-ALIN2-2FT-3P25-D-5CCT-WH-RTK,0.54431,ok,,page re-opened: Part Number and Weight match
+63862,HomElectrical.com product page (Product Specifications > Weight),LED-CMD-8-3M36-5CCT-CUNV,2.04117,ok,,page re-opened: Part Number and Weight match
+63651,HomElectrical.com product page (Product Specifications > Weight),C4-RM-ICAT-LED-0/10V,0.56699,ok,,page re-opened: Part Number and Weight match
+4017,HomElectrical.com product page (Product Specifications > Weight),LED-VT-SQFT-22-3P19-5CCT-BL,0.34019,ok,,page re-opened: Part Number and Weight match
+53883,HomElectrical.com product page (Product Specifications > Weight),LED-ALIN2-8FT-3P100-D-5CCT-WH-TB,3.85554,ok,,page re-opened: Part Number and Weight match
+64040,HomElectrical.com product page (Product Specifications > Weight),S-TWC-MW-1,0.09072,ok,,page re-opened: Part Number and Weight match
+52335,"Alteck spec sheet (""Product Weight"")",AW0079-3CCT-W-BK,2.5855,ok,,"spec PDF re-opened: model matches (finish-agnostic sheet), Product Weight matches; net"
+52319,"Alteck spec sheet (""Product Weight"")",AW0102-3CCT-W-BK,1.8144,ok,,"spec PDF re-opened: model matches (finish-agnostic sheet), Product Weight matches; net"
+20599,"Alteck spec sheet (""Product Weight"")",AP0078-5CCT-W-BK,4.3998,ok,,"spec PDF re-opened: model matches (finish-agnostic sheet), Product Weight matches; net"
+20573,"Alteck spec sheet (""Product Weight"")",AFM0012-3CCT-W-BK,1.8144,ok,,"spec PDF re-opened: model matches (finish-agnostic sheet), Product Weight matches; net"
+52312,"Alteck spec sheet (""Product Weight"")",AW0109-3CCT-W-BK,0.9072,ok,,"spec PDF re-opened: model matches (finish-agnostic sheet), Product Weight matches; net"
+27700,EMCOD spec sheet,ML75S24DC,1.7463,ok,,"spec PDF re-opened: model matches, ""Weight (LBs)"" matches"
+27713,EMCOD spec sheet,ML20S12DC,0.8618,ok,,"spec PDF re-opened: model matches, ""Weight (LBs)"" matches"
+27696,EMCOD spec sheet,EM150S24DC,3.6287,ok,,"spec PDF re-opened: model matches, ""Weight (LBs)"" matches"
+27706,EMCOD spec sheet,ML50S24DC,1.0206,ok,,"spec PDF re-opened: model matches, ""Weight (LBs)"" matches"
+27780,EMCOD spec sheet,EDR96-24DC,0.381,ok,,"spec PDF re-opened: model matches, ""Weight (LBs)"" matches"
+17410,UMAGE products.json,3038,0.62,ok,,"umage.com JSON re-fetched: our item no. not listed; all colours of the same model/size share this grams value, so size-matched variant is consistent"
+4080,UMAGE products.json,2335,7.17,ok,,"umage.com JSON re-fetched: our item no. not listed; all colours of the same model/size share this grams value, so size-matched variant is consistent"
+4124,UMAGE products.json,3033,0.26,ok,,"umage.com JSON re-fetched: our item no. not listed; all colours of the same model/size share this grams value, so size-matched variant is consistent"
+4527,UMAGE products.json,3037,0.62,ok,,"umage.com JSON re-fetched: our item no. not listed; all colours of the same model/size share this grams value, so size-matched variant is consistent"
+4649,UMAGE products.json,2310,2.32,ok,,"umage.com JSON re-fetched: our item no. not listed; all colours of the same model/size share this grams value, so size-matched variant is consistent"
+35866,Advantage Electric Supply,PL75WH,0.02268,ok,,"page re-opened: same part, ""Shipping Weight"" matches"
+36932,Advantage Electric Supply,GDB1MC,0.17237,ok,,"page re-opened: same part, ""Shipping Weight"" matches"
+36160,Advantage Electric Supply,OF643,0.95254,pack_issue,0.0381,"page: ""Orbit OF643 Cord and Cable Fittings 25BOX""; 2.10 lb is per box of 25, title is single piece -> ~0.038 kg/pc"
+36873,Advantage Electric Supply,GSB1,0.20412,ok,,"page re-opened: same part, ""Shipping Weight"" matches"
+35361,Advantage Electric Supply,SR3,0.24948,ok,,"page re-opened: same part, ""Shipping Weight"" matches"
+55906,HomElectrical.com,14302,2.14549,ok,,page re-opened: Part Number and Weight match
+55652,HomElectrical.com,21787,0.0499,ok,,page re-opened: Part Number and Weight match
+55603,HomElectrical.com,21868,0.05443,implausible,,page matches (0.12 lb) but a 3-in malleable-iron parallel pipe clamp weighs far more than 54 g; retailer data error
+55633,HomElectrical.com,21835,0.12247,ok,,page re-opened: Part Number and Weight match
+54933,HomElectrical.com,80548,0.15876,ok,,page re-opened: Part Number and Weight match
+58213,The Home Depot (homedepot.com),BR320,0.4218,ok,,"HD page re-opened: modelNumber matches, ""Product Weight (lb.)"" matches, Pack Size 1"
+57887,The Home Depot (homedepot.com),THQP245,0.1814,ok,,"HD page re-opened: modelNumber matches, ""Product Weight (lb.)"" matches, Pack Size 1"
+58436,The Home Depot (homedepot.com),Q330,0.3969,ok,,"HD page re-opened: modelNumber matches, ""Product Weight (lb.)"" matches, Pack Size 1"
+58285,The Home Depot (homedepot.com),QN2175RH,0.9979,ok,,"HD page re-opened: modelNumber matches, ""Product Weight (lb.)"" matches, Pack Size 1"
+58227,The Home Depot (homedepot.com),BD1515,0.1678,ok,,"HD page re-opened: modelNumber matches, ""Product Weight (lb.)"" matches, Pack Size 1"

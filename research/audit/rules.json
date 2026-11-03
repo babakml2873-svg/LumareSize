@@ -1,0 +1,44 @@
+[
+ {
+  "source_name": "Arlington Industries (aifittings.com)",
+  "condition": "Title has a pack qty N>1 (regex on Title: \\((\\d+)[- ]?(?:Pack|Pk|pack)\\)|Case of (\\d+)|(\\d+)[- ]Pack\\b|Box of (\\d+)). All recorded weights are per piece ('lbs/each'); N always equals aifittings 'unit packaging Npcs' in notes. Scope: 1174 rows.",
+  "action": "multiply:N (N = pack qty from Title)",
+  "evidence": "8/10 sampled rows were N-packs with per-each weight (e.g. 842 (50-Pack) 0.082 lb/each; SH1 (100-Pack) 0.008 lb/each). Also row 18285 (524, unit packaging 25pcs, no pack in title) is per piece: keep."
+ },
+ {
+  "source_name": "Walters Wholesale Electric (USESI) catalog",
+  "condition": "weight_type=='net' AND Title has pack qty N>1 (same regex). Walters 'Net Weight' is per single piece (Westinghouse bulbs sold 'Each'; Dottie net is per piece while 'Gross Weight' is the box). Scope: 197 rows (79 also carry 'Gross Weight X lb' in notes). Rows with weight_type=='shipping' (Gross) for Dottie are already per box: leave.",
+  "action": "multiply:N (or, where notes contain r'Gross Weight ([0-9.]+) lb', use that gross value and mark_shipping)",
+  "evidence": "NSR100L (10-Pack): Net 0.109 lb vs Gross 1.0 lb; 0406500 (6-Pack) S11 bulb Net 0.17 lb, Walters UOM Each; non-sampled e.g. FM8322 (100-Pack) Net 0.0105 lb vs Gross 1.05 lb."
+ },
+ {
+  "source_name": "sonicelectric.com Shopify product JSON (variant grams)",
+  "condition": "weight_value == 1814 g (= 4.0 lb). Scope: 19 rows.",
+  "action": "drop",
+  "evidence": "1814 g is Sonic Electric's Shopify default: 15,507 of ~22k variants in the full feed dump (agents/g7/dl/sonic.json); 2,308 of 2,422 items with a description weight still show 1814 g. Sampled STS09 (small SS deck light) = 1814 g."
+ },
+ {
+  "source_name": "sonicelectric.com Shopify product JSON (variant grams)",
+  "condition": "all remaining rows (grams != 1814), and the grams-based rows of 'Sonic Electric' (weight_unit=='g', 268 rows)",
+  "action": "mark_shipping",
+  "evidence": "Non-default Sonic grams are rounded to 0.5 lb in 98% of cases and are a median 1.14x the published product weight (within 25% for 68%), i.e. packaged/shipping estimates, not net."
+ },
+ {
+  "source_name": "homelectrical.com product page (Product Specifications > Weight)",
+  "condition": "Vendor == 'Diode LED' AND weight_value == 1.0 (lb). Scope: 271 rows (largest single value; covers 100-ft/164-ft spools, 96-in channel bundles, DC connectors alike).",
+  "action": "drop",
+  "evidence": "Sampled DI-120V-INFBSC3-30-164 (164 ft 120V tape spool) = 1.00 lb, not credible. 100-ft spools: 70 rows at exactly 1.0 lb versus 2.6 lb for VALENT X 300 100 ft, so 1.0 lb is a default value."
+ },
+ {
+  "source_name": "Advantage Electric Supply",
+  "condition": "Product description on the page contains r'\\b(\\d+)\\s*BOX\\b' (e.g. 'Cord and Cable Fittings 25BOX') and Title has no pack qty. Scope: 8 rows: 35333 SRM175 (50), 35401 SLN300 (5), 35545 RX50 (100), 35904 PB400 (10), 35907 PB250 (10), 35908 PB200 (10), 35911 PB100 (100), 36160 OF643 (25).",
+  "action": "multiply:1/N (N = box qty)",
+  "evidence": "OF643 page: 'Orbit OF643 Cord and Cable Fittings 25BOX', Shipping Weight 2.10 lb, i.e. 0.95 kg for one 3/8 in connector (implausible); /25 gives 38 g."
+ },
+ {
+  "source_name": "Kuzco Lighting (Alora) products.json",
+  "condition": "Alora Valise family (sku regex r'^P[DL]3079\\d\\d') with weight_kg > 15",
+  "action": "drop",
+  "evidence": "PL307931 (32-in picture light) = 33,022 g on every finish; PL307919 = 20,003 g; PD307960 = 25,038 g. None of these is credible even as a shipping weight. No net weight is published on the page or the spec sheet."
+ }
+]

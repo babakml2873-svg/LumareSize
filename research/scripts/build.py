@@ -103,6 +103,31 @@ if H:
     H=H[~H.url.fillna('').str.contains('lumera|ebay\\.|cdn.shopify.com/s/files/1/0751/5455/4925',case=False)]
     pr={'Manufacturer':0,'Distributor':1,'Retailer':2}
     H['_p']=H.source_type.map(pr).fillna(3)+H.match.map({'exact':0,'variant':0.5}).fillna(1)
+    # ---- audit rules (scratchpad/audit/rules.json) ----
+    _pk=H.row_id.map(o['pack']).fillna(1).astype(int)
+    _vend0=H.row_id.map(v['Vendor'])
+    _sn=H.source_name.astype(str); _nt=H.notes.fillna('').astype(str)
+    H['weight_value']=pd.to_numeric(H.weight_value,errors='coerce')
+    # 1) Walters net weight is per piece on N-pack titles -> use Gross from notes if present, else x N
+    m=_sn.str.contains('Walters',case=False)&(H.weight_type.astype(str)=='net')&(_pk>1)
+    gw=_nt.str.extract(r'Gross Weight\D{0,5}([0-9.]+)\s*(?:lb|pound)',expand=False).astype(float)
+    use=m&gw.notna(); H.loc[use,'weight_kg']=gw[use]*0.45359237; H.loc[use,'weight_type']='shipping'; H.loc[use,'notes']=_nt[use]+' | audit: Walters net is per piece; used pack Gross Weight'
+    mul=m&gw.isna(); H.loc[mul,'weight_kg']=H.loc[mul,'weight_kg']*_pk[mul]; H.loc[mul,'notes']=_nt[mul]+' | audit: Walters net weight is per piece; multiplied by pack qty'
+    # 2) Sonic Shopify default 1814 g -> drop; other Sonic grams -> shipping
+    sg=_sn.str.contains('sonic',case=False)&H.weight_unit.astype(str).str.lower().eq('g')
+    H=H[~(sg&(H.weight_value.round(0)==1814))]
+    sg=H.source_name.astype(str).str.contains('sonic',case=False)&H.weight_unit.astype(str).str.lower().eq('g')
+    H.loc[sg,'weight_type']='shipping'
+    # 3) homelectrical Diode LED 1.00 lb default -> drop
+    _vend0=H.row_id.map(v['Vendor'])
+    H=H[~(H.source_name.astype(str).str.contains('homelectrical',case=False)&(_vend0=='Diode LED')&(H.weight_value.round(3)==1.0))]
+    # 4) Advantage box quantities
+    for rid,n in {35333:50,35401:5,35545:100,35904:10,35907:10,35908:10,35911:100,36160:25}.items():
+        mm=(H.row_id==rid)&H.source_name.astype(str).str.contains('Advantage',case=False)
+        H.loc[mm,'weight_kg']=H.loc[mm,'weight_kg']/n; H.loc[mm,'notes']=H.loc[mm,'notes'].fillna('')+f' | audit: page weight is for box of {n}; divided'
+    # 5) Alora Valise impossible weights
+    H=H[~(H.sku.astype(str).str.match(r'^P[DL]3079\d\d')&(H.weight_kg>15))]
+    print('after audit rules',len(H))
     # placeholder filter: non-manufacturer source+vendor where one value covers >=25% of >=15 rows
     H['_vend']=H.row_id.map(v['Vendor'])
     H['_r']=H.weight_kg.round(3)
@@ -195,7 +220,7 @@ if _os.path.exists(SP+'ml_pred.pkl'):
         prev=rec['Research Notes']
         notes=[f"Estimated by machine-learning model (LightGBM) trained on 20,742 weights read from manufacturer/distributor sources; inputs: category, brand, product type, title text, size attributes, pack qty, price",
                f"80% prediction interval per piece: {rnd(lo)}–{rnd(hi)} kg",
-               "model accuracy on unseen products: median error 1.20x; 75% within ±50%"]
+               "model accuracy on unseen products (ensemble of 2 LightGBM models): median error 1.20x; 76% within ±50%; 89% within 2x"]
         if q>1: notes.append(f'per piece {rnd(per)} kg x {q} (pack qty from title)')
         notes.append(f'Shipping weight estimated {alloc}')
         if rec.get('Reference Model'): notes.append('Reference product shown = nearest comparable with a published weight (sanity reference)')
