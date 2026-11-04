@@ -16,7 +16,7 @@ df['text']=(df.Title.fillna('')+' '+df[['Option1 Value','Option2 Value','Option3
 df['price']=pd.to_numeric(df['Variant Price'],errors='coerce')/df.pack
 # ---- issue rows -> link to our rows (sku+handle, else sku)
 key=v.reset_index()[['index','Handle','Variant SKU']].rename(columns={'index':'row'})
-key['sku']=key['Variant SKU'].astype(str).str.strip()
+key['sku']=key['Variant SKU'].astype(str).str.lstrip("'").str.strip()
 m1=V.merge(key[['row','Handle','sku']],on=['Handle','sku'],how='left')
 miss=m1.row.isna()
 m2=V[miss.values].merge(key.drop_duplicates('sku')[['row','sku']],on='sku',how='left')
