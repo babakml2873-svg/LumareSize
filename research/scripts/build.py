@@ -250,6 +250,22 @@ if _os.path.exists(SP+'strong_matches.pkl'):
             'Research Notes':'; '.join(x for x in notes if x),'Net Weight per Piece (kg)':rnd(per) if q>1 else None})
         nsm+=1
     print('strong similar-product matches applied',nsm)
+# ---- overrides from user's issue review (issues/fixed.pkl)
+if _os.path.exists(SP+'issues/fixed.pkl'):
+    FX=pd.read_pickle(SP+'issues/fixed.pkl'); FX=FX[FX.row.notna()]; nfx=0
+    for _,fx in FX.iterrows():
+        i=int(fx.row)
+        if i not in recs: continue
+        rec=recs[i]
+        if str(fx.action).startswith('keep'):
+            rec['Research Notes']=rec['Research Notes']+f"; QC (user review '{fx.Issue}'): {fx.reason}"
+            continue
+        g=float(fx.new_g)/1000; cls=rec['_cls']
+        net=g/1.4 if cls=='lamp_bulb' else (g/1.10 if g<1 else g/1.25)
+        rec.update({'Shipping Weight (kg)':rnd(g),'Net Weight (kg)':rnd(net),'Weight Status':'Estimated','Source Type':'Comparable (corrected after QC)',
+                    'Confidence':'Low','Research Notes':f"Corrected after user QC ('{fx.Issue}'): previous {fx['Weight (g)']:.0f} g rejected – {fx.reason}"})
+        nfx+=1
+    print('QC overrides applied',nfx)
 R=pd.DataFrame.from_dict(recs,orient='index')
 cols=['Net Weight (kg)','Shipping Weight (kg)','Weight Status','Source Type','Reference Brand','Reference Model','Reference Weight (kg)','Source URL','Confidence','Research Notes']
 full=d.join(R)
